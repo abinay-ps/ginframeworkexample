@@ -6,5 +6,5 @@ import (
 
 func main() {
 	router := gin.Default()
-
+	handlers.callhandlers(router)
 }
