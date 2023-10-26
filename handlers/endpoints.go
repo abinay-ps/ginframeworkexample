@@ -1,6 +1,8 @@
 package handlers
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 func callhandlers(router *gin.Engine) {
 	router.GET("/movie", functions.getMovies)             //Get all movies
