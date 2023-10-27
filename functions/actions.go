@@ -55,4 +55,5 @@ func DeleteMovie(c *gin.Context) {
 			return
 		}
 	}
+	c.String(http.StatusOK, "No movie exists to delete for the inputed id: %v", id)
 }
