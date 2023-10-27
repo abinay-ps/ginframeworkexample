@@ -7,22 +7,22 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func getMovies(c *gin.Context) {
+func GetMovies(c *gin.Context) {
 	c.JSON(http.StatusOK, entity.Movies)
 }
 
-func getMovieByID(c *gin.Context) {
+func GetMovieByID(c *gin.Context) {
 	c.JSON(http.StatusOK, entity.Movies)
 }
 
-func createMovie(c *gin.Context) {
+func CreateMovie(c *gin.Context) {
 	c.JSON(http.StatusOK, entity.Movies)
 }
 
-func pdateMoviePrice(c *gin.Context) {
+func UpdateMoviePrice(c *gin.Context) {
 	c.JSON(http.StatusOK, entity.Movies)
 }
 
-func deleteMovie(c *gin.Context) {
+func DeleteMovie(c *gin.Context) {
 	c.JSON(http.StatusOK, entity.Movies)
 }
