@@ -1,6 +1,7 @@
 package functions
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/abinay-ps/ginframeworkexample/entity"
@@ -19,17 +20,39 @@ func GetMovieByID(c *gin.Context) {
 			return
 		}
 	}
-	c.JSON(http.StatusOK, "No movie exists for the inputed ID")
+	c.String(http.StatusOK, "No movie exists for the inputed ID: %v", id)
 }
 
 func CreateMovie(c *gin.Context) {
-	c.JSON(http.StatusOK, entity.Movies)
+	var newMovie entity.Movie
+	if err := c.BindJSON(&newMovie); err != nil {
+		fmt.Println("err: ", err)
+		return
+	}
+	entity.Movies = append(entity.Movies, newMovie)
+	c.String(http.StatusCreated, "New Movie with the details: %v is created", newMovie)
 }
 
 func UpdateMoviePrice(c *gin.Context) {
-	c.JSON(http.StatusOK, entity.Movies)
+	id := c.Param("id")
+	price := c.Param("price")
+	for i, val := range entity.Movies {
+		if id == val.ID {
+			entity.Movies[i].Price = price
+			c.String(http.StatusOK, "The price of the movie %v is updated as %v", val.Title, price)
+			return
+		}
+	}
+	c.String(http.StatusOK, "No movie exists for the inputed id: %v", id)
 }
 
 func DeleteMovie(c *gin.Context) {
-	c.JSON(http.StatusOK, entity.Movies)
+	id := c.Param("id")
+	for i, val := range entity.Movies {
+		if id == val.ID {
+			entity.Movies = append(entity.Movies[:i], entity.Movies[i+1:]...)
+			c.String(http.StatusOK, "The movie with id: %v is deleted", id)
+			return
+		}
+	}
 }
